@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyeux Anniversaire Papa ! 🎂🎉</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a0b2e, #3b0764, #1e1b4b);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(30, 27, 75, 0.65);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(244, 114, 182, 0.3);
+            padding: 35px;
+            border-radius: 32px;
+            text-align: center;
+            max-width: 720px;
+            width: 100%;
+            box-shadow: 0 0 50px rgba(236, 72, 153, 0.25), 0 20px 40px rgba(0, 0, 0, 0.6);
+            position: relative;
+            z-index: 10;
+            margin: 20px 0;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 5px;
+            background: linear-gradient(90deg, #ff758c, #ff7eb3, #ffd1ff, #70a1ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 10px rgba(255, 117, 140, 0.4));
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #fbcfe8;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Compteur de temps coloré */
+        .counter-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .counter-box {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(139, 92, 246, 0.2));
+            border: 1px solid rgba(244, 114, 182, 0.4);
+            padding: 14px 5px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .counter-number {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #f472b6;
+        }
+
+        .counter-label {
+            font-size: 0.75rem;
+            color: #e2e8f0;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* Carrousel de Photos */
+        .gallery-section {
+            margin-bottom: 25px;
+        }
+
+        .gallery-title {
+            font-size: 1.2rem;
+            color: #f472b6;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .carousel-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 10px 5px;
+            scrollbar-width: none;
+        }
+
+        .carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .photo-card {
+            min-width: 260px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(244, 114, 182, 0.3);
+            border-radius: 20px;
+            padding: 10px;
+            transition: transform 0.3s, border-color 0.3s;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .photo-card:hover {
+            transform: scale(1.03);
+            border-color: #ec4899;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 14px;
+            display: block;
+        }
+
+        .photo-card span {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #fbcfe8;
+            font-weight: 600;
+        }
+
+        .nav-btn {
+            background: rgba(236, 72, 153, 0.7);
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            padding: 10px 14px;
+            border-radius: 50%;
+            cursor: pointer;
+            position: absolute;
+            z-index: 15;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: rgba(236, 72, 153, 1);
+            transform: scale(1.1);
+        }
+
+        .nav-btn.left { left: -15px; }
+        .nav-btn.right { right: -15px; }
+
+        /* Pop-up Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 16px;
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.5);
+            border: 2px solid rgba(244, 114, 182, 0.5);
+        }
+
+        .lightbox-caption {
+            margin-top: 15px;
+            font-size: 1.1rem;
+            color: #fbcfe8;
+            font-weight: 600;
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.2);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Gâteau interactif */
+        .cake-section {
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.2), rgba(79, 70, 229, 0.2));
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(168, 85, 247, 0.4);
+        }
+
+        .candles {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin-bottom: 10px;
+        }
+
+        .candle {
+            cursor: pointer;
+            font-size: 2.2rem;
+            transition: transform 0.2s, filter 0.3s;
+            user-select: none;
+        }
+
+        .candle:hover {
+            transform: scale(1.25);
+        }
+
+        .candle.off {
+            opacity: 0.35;
+            filter: grayscale(0.8);
+        }
+
+        .cake-text {
+            font-size: 0.95rem;
+            color: #fbcfe8;
+            font-weight: 600;
+        }
+
+        /* Badges */
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .badge-card {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 14px 10px;
+            border-radius: 16px;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .badge-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .badge-card span {
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .badge-card h4 {
+            font-size: 0.85rem;
+            color: #a78bfa;
+            margin-bottom: 2px;
+        }
+
+        .badge-card p {
+            font-size: 0.75rem;
+            color: #cbd5e1;
+        }
+
+        /* Citation */
+        .quote-box {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(59, 130, 246, 0.15));
+            border-left: 5px solid #ec4899;
+            padding: 15px 20px;
+            border-radius: 0 16px 16px 0;
+            text-align: left;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            color: #f1f5f9;
+        }
+
+        /* Boutons */
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            color: white;
+            border: none;
+            padding: 13px 24px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(236, 72, 153, 0.6);
+        }
+
+        .hidden-message {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #f472b6;
+            font-weight: 800;
+            display: none;
+            animation: fadeIn 0.5s ease-in-out forwards;
+            text-shadow: 0 0 15px rgba(244, 114, 182, 0.5);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        canvas.confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        @media (max-width: 650px) {
+            .counter-grid { grid-template-columns: repeat(2, 1fr); }
+            .badges-grid { grid-template-columns: 1fr; }
+            .container { padding: 20px; }
+            h1 { font-size: 2.2rem; }
+            .nav-btn.left { left: 0px; }
+            .nav-btn.right { right: 0px; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas class="confetti" id="confetti-canvas"></canvas>
+
+    <div class="container">
+        <h1>Joyeux Anniversaire Papa ! 🚀</h1>
+        <p class="subtitle">Né le 10 octobre 1981 • Cap sur les 45 ans avec panache !</p>
+
+        <!-- Compteur de temps basé sur l'heure du téléphone -->
+        <div class="counter-grid">
+            <div class="counter-box">
+                <div class="counter-number" id="years">--</div>
+                <div class="counter-label">Ans</div>
+            </div>
+            <div class="counter-box">
+                <div class="counter-number" id="days">--</div>
+                <div class="counter-label">Jours</div>
+            </div>
+            <div class="counter-box">
+                <div class="counter-number" id="hours">--</div>
+                <div class="counter-label">Heures</div>
+            </div>
+            <div class="counter-box">
+                <div class="counter-number" id="seconds">--</div>
+                <div class="counter-label">Secondes</div>
+            </div>
+        </div>
+
+        <!-- Galerie de souvenirs en carrousel -->
+        <div class="gallery-section">
+            <h3 class="gallery-title">📸 Souvenirs en famille (Glisse & Clique pour agrandir)</h3>
+            <div class="carousel-container">
+                <button class="nav-btn left" onclick="scrollCarousel(-200)">❮</button>
+                <div class="carousel-track" id="carouselTrack">
+                    <div class="photo-card" onclick="openLightbox('img/repas_st-Gobain.jpg', 'Repas à Saint-Gobain 🍽️')">
+                        <img src="img/repas_st-Gobain.jpg" alt="Repas à Saint-Gobain">
+                        <span>Repas à Saint-Gobain 🍽️</span>
+                    </div>
+                    <div class="photo-card" onclick="openLightbox('img/souvenir_1.jpg', 'Les bons moments ❤️')">
+                        <img src="img/souvenir_1.jpg" alt="Bons moments ensemble">
+                        <span>Les bons moments ❤️</span>
+                    </div>
+                </div>
+                <button class="nav-btn right" onclick="scrollCarousel(200)">❯</button>
+            </div>
+        </div>
+
+        <!-- Gâteau interactif -->
+        <div class="cake-section">
+            <div class="candles">
+                <span class="candle" onclick="extinguish(this)">🕯️</span>
+                <span class="candle" onclick="extinguish(this)">🕯️</span>
+                <span class="candle" onclick="extinguish(this)">🕯️</span>
+                <span class="candle" onclick="extinguish(this)">🕯️</span>
+                <span class="candle" onclick="extinguish(this)">🕯️</span>
+            </div>
+            <p class="cake-text" id="cake-status">Clique sur les bougies pour les souffler ! 🎂</p>
+        </div>
+
+        <!-- Badges Super-Pouvoirs -->
+        <div class="badges-grid">
+            <div class="badge-card">
+                <span>👑</span>
+                <h4>Chef Supreme</h4>
+                <p>Le boss incontesté de la maison</p>
+            </div>
+            <div class="badge-card">
+                <span>💡</span>
+                <h4>Astucieux</h4>
+                <p>Toujours une solution à tout</p>
+            </div>
+            <div class="badge-card">
+                <span>🔥</span>
+                <h4>Légendaire</h4>
+                <p>Une énergie au top depuis 1981</p>
+            </div>
+        </div>
+
+        <!-- Citation dynamique -->
+        <div class="quote-box" id="fun-quote">
+            💡 <b>Le saviez-vous ?</b> Avoir un super papa comme toi, ça n'a pas de prix.
+        </div>
+
+        <!-- Boutons d'action -->
+        <div class="btn-group">
+            <button class="btn" id="music-btn" onclick="toggleMusic()">🎵 Musique 8-bit Douce</button>
+            <button class="btn btn-secondary" onclick="revealSurprise()">🎁 Message Final</button>
+        </div>
+
+        <div id="surprise" class="hidden-message">
+            Passe une journée extraordinaire, tu es le meilleur des papas ! ❤️
+        </div>
+    </div>
+
+    <!-- Pop-up Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="close-lightbox">&times;</span>
+        <img id="lightboxImg" src="" alt="Image agrandie">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+
+    <script>
+        // 1. Carrousel de défilement horizontal
+        function scrollCarousel(distance) {
+            const track = document.getElementById('carouselTrack');
+            track.scrollBy({ left: distance, behavior: 'smooth' });
+        }
+
+        // 2. Pop-up Lightbox
+        function openLightbox(imgSrc, captionText) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxCaption = document.getElementById('lightboxCaption');
+            
+            lightboxImg.src = imgSrc;
+            lightboxCaption.innerText = captionText;
+            lightbox.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        // 3. Horloge en temps réel basée sur le téléphone
+        const birthDate = new Date('1981-10-10T00:00:00');
+
+        function updateCounter() {
+            const now = new Date();
+            const diff = now - birthDate;
+
+            if (diff > 0) {
+                const years = now.getFullYear() - birthDate.getFullYear();
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = now.getHours();
+                const seconds = now.getSeconds();
+
+                document.getElementById('years').innerText = years;
+                document.getElementById('days').innerText = days.toLocaleString();
+                document.getElementById('hours').innerText = hours;
+                document.getElementById('seconds').innerText = seconds;
+            }
+        }
+        
+        setInterval(updateCounter, 1000);
+        updateCounter();
+
+        // Citations tournantes
+        const quotes = [
+            "💡 <b>Le saviez-vous ?</b> 1981 a été un grand cru, la preuve en est !",
+            "🎯 <b>Proverbe du jour :</b> Un papa formidable mérite une journée légendaire.",
+            "⭐ <b>Statistique :</b> 100% de bienveillance et de bonne humeur au compteur.",
+            "🚀 <b>Mission du jour :</b> Profiter à fond et se faire chouchouter !"
+        ];
+        setInterval(() => {
+            const qBox = document.getElementById('fun-quote');
+            if(!qBox) return;
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            qBox.style.opacity = 0;
+            setTimeout(() => {
+                qBox.innerHTML = randomQuote;
+                qBox.style.opacity = 1;
+            }, 300);
+        }, 7000);
+
+        // Bougies interactives
+        let candlesLeft = 5;
+        function extinguish(element) {
+            if (!element.classList.contains('off')) {
+                element.classList.add('off');
+                candlesLeft--;
+                const statusEl = document.getElementById('cake-status');
+                if (candlesLeft === 0) {
+                    statusEl.innerText = "🎉 Félicitations ! Vœu validé avec succès ! 🎉";
+                    playConfettiSound();
+                    launchConfetti();
+                } else {
+                    statusEl.innerText = `Encore ${candlesLeft} bougie(s) à souffler !`;
+                }
+            }
+        }
+
+        // 4. Lecteur Audio 8-bit doux
+        let audioCtx = null;
+        let isPlaying = false;
+        let loopTimeout = null;
+
+        function playNotes() {
+            if (!isPlaying) return;
+
+            const notes = [
+                { f: 261.63, d: 0.35 }, { f: 261.63, d: 0.35 }, { f: 293.66, d: 0.7 }, { f: 261.63, d: 0.7 }, { f: 349.23, d: 0.7 }, { f: 329.63, d: 1.2 },
+                { f: 261.63, d: 0.35 }, { f: 261.63, d: 0.35 }, { f: 293.66, d: 0.7 }, { f: 261.63, d: 0.7 }, { f: 392.00, d: 0.7 }, { f: 349.23, d: 1.2 },
+                { f: 261.63, d: 0.35 }, { f: 261.63, d: 0.35 }, { f: 523.25, d: 0.7 }, { f: 440.00, d: 0.7 }, { f: 349.23, d: 0.7 }, { f: 329.63, d: 0.7 }, { f: 293.66, d: 0.7 },
+                { f: 466.16, d: 0.35 }, { f: 466.16, d: 0.35 }, { f: 440.00, d: 0.7 }, { f: 349.23, d: 0.7 }, { f: 392.00, d: 0.7 }, { f: 349.23, d: 1.4 },
+                
+                { f: 0, d: 0.4 },
+
+                { f: 523.25, d: 0.35 }, { f: 523.25, d: 0.35 }, { f: 587.33, d: 0.7 }, { f: 523.25, d: 0.7 }, { f: 698.46, d: 0.7 }, { f: 659.25, d: 1.2 },
+                { f: 523.25, d: 0.35 }, { f: 523.25, d: 0.35 }, { f: 587.33, d: 0.7 }, { f: 523.25, d: 0.7 }, { f: 783.99, d: 0.7 }, { f: 698.46, d: 1.2 },
+                { f: 523.25, d: 0.35 }, { f: 523.25, d: 0.35 }, { f: 1046.50, d: 0.7 }, { f: 880.00, d: 0.7 }, { f: 698.46, d: 0.7 }, { f: 659.25, d: 0.7 }, { f: 587.33, d: 0.7 },
+                { f: 932.33, d: 0.35 }, { f: 932.33, d: 0.35 }, { f: 880.00, d: 0.7 }, { f: 698.46, d: 0.7 }, { f: 783.99, d: 0.7 }, { f: 698.46, d: 1.8 }
+            ];
+
+            let time = audioCtx.currentTime;
+            notes.forEach(note => {
+                if (note.f > 0) {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(note.f, time);
+                    
+                    gain.gain.setValueAtTime(0.08, time);
+                    gain.gain.exponentialRampToValueAtTime(0.001, time + note.d);
+
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+
+                    osc.start(time);
+                    osc.stop(time + note.d);
+                }
+                time += note.d + 0.04;
+            });
+
+            const totalDuration = (time - audioCtx.currentTime) * 1000;
+            loopTimeout = setTimeout(() => {
+                if (isPlaying) playNotes();
+            }, totalDuration);
+        }
+
+        function toggleMusic() {
+            const btn = document.getElementById('music-btn');
+            if (isPlaying) {
+                isPlaying = false;
+                clearTimeout(loopTimeout);
+                if (audioCtx) audioCtx.close();
+                btn.innerText = "🎵 Musique 8-bit Douce";
+            } else {
+                isPlaying = true;
+                btn.innerText = "⏸️ Couper la Musique";
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                playNotes();
+            }
+        }
+
+        // 5. Générateur de vrai bruit de canon à confettis (Pop + Bruit de pression d'air)
+        function playConfettiSound() {
+            try {
+                const soundCtx = new (window.AudioContext || window.webkitAudioContext)();
+                
+                // 1. Coup de Pression d'Air (Bruit Blanc filtré)
+                const bufferSize = soundCtx.sampleRate * 0.25; // 0.25 seconde
+                const buffer = soundCtx.createBuffer(1, bufferSize, soundCtx.sampleRate);
+                const data = buffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    data[i] = Math.random() * 2 - 1; // Bruit blanc
+                }
+
+                const noise = soundCtx.createBufferSource();
+                noise.buffer = buffer;
+
+                // Filtre pass-bas pour donner un effet de "Pfft / Boom"
+                const filter = soundCtx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(1000, soundCtx.currentTime);
+                filter.frequency.exponentialRampToValueAtTime(100, soundCtx.currentTime + 0.2);
+
+                const noiseGain = soundCtx.createGain();
+                noiseGain.gain.setValueAtTime(0.4, soundCtx.currentTime);
+                noiseGain.gain.exponentialRampToValueAtTime(0.01, soundCtx.currentTime + 0.2);
+
+                noise.connect(filter);
+                filter.connect(noiseGain);
+                noiseGain.connect(soundCtx.destination);
+
+                // 2. Le "POP" sec de l'explosion du canon
+                const popOsc = soundCtx.createOscillator();
+                const popGain = soundCtx.createGain();
+                popOsc.type = 'triangle';
+                popOsc.frequency.setValueAtTime(350, soundCtx.currentTime);
+                popOsc.frequency.exponentialRampToValueAtTime(60, soundCtx.currentTime + 0.08);
+
+                popGain.gain.setValueAtTime(0.5, soundCtx.currentTime);
+                popGain.gain.exponentialRampToValueAtTime(0.01, soundCtx.currentTime + 0.08);
+
+                popOsc.connect(popGain);
+                popGain.connect(soundCtx.destination);
+
+                // Lancement simultané du POP et du souffle d'air
+                popOsc.start();
+                popOsc.stop(soundCtx.currentTime + 0.08);
+                noise.start();
+                noise.stop(soundCtx.currentTime + 0.2);
+
+            } catch (e) {
+                console.log("Audio non supporté sans interaction préalable");
+            }
+        }
+
+        function revealSurprise() {
+            const surprise = document.getElementById('surprise');
+            surprise.style.display = 'block';
+            playConfettiSound(); // Joue le vrai son du canon à confettis !
+            launchConfetti();
+        }
+
+        // Système d'animation de confettis
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function launchConfetti() {
+            particles = [];
+            for (let i = 0; i < 250; i++) {
+                particles.push({
+                    x: window.innerWidth / 2,
+                    y: window.innerHeight / 2,
+                    vx: (Math.random() - 0.5) * 18,
+                    vy: (Math.random() - 0.7) * 18 - 5,
+                    color: ['#ff758c', '#ff7eb3', '#70a1ff', '#1e90ff', '#ffd32a', '#ff4757', '#2ed573', '#9b59b6'][Math.floor(Math.random() * 8)],
+                    size: Math.random() * 10 + 4,
+                    life: 140
+                });
+            }
+            animateConfetti();
+        }
+
+        function animateConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, index) => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.35;
+                p.life--;
+
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+
+                if (p.life <= 0) {
+                    particles.splice(index, 1);
+                }
+            });
+
+            if (particles.length > 0) {
+                requestAnimationFrame(animateConfetti);
+            }
+        }
+    </script>
+</body>
+</html>
