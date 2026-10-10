@@ -6,11 +6,7 @@
     <title>Joyeux Anniversaire Papa ! 🎂🎉</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Poppins', sans-serif;
@@ -56,7 +52,6 @@
             font-weight: 600;
         }
 
-        /* Compteur de temps coloré */
         .counter-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -85,10 +80,7 @@
             font-weight: 600;
         }
 
-        /* Carrousel de Photos */
-        .gallery-section {
-            margin-bottom: 25px;
-        }
+        .gallery-section { margin-bottom: 25px; }
 
         .gallery-title {
             font-size: 1.2rem;
@@ -112,9 +104,7 @@
             scrollbar-width: none;
         }
 
-        .carousel-track::-webkit-scrollbar {
-            display: none;
-        }
+        .carousel-track::-webkit-scrollbar { display: none; }
 
         .photo-card {
             min-width: 260px;
@@ -169,7 +159,6 @@
         .nav-btn.left { left: -15px; }
         .nav-btn.right { right: -15px; }
 
-        /* Pop-up Lightbox */
         .lightbox {
             display: none;
             position: fixed;
@@ -217,7 +206,6 @@
             justify-content: center;
         }
 
-        /* Gâteau interactif */
         .cake-section {
             background: linear-gradient(135deg, rgba(147, 51, 234, 0.2), rgba(79, 70, 229, 0.2));
             border-radius: 20px;
@@ -240,9 +228,7 @@
             user-select: none;
         }
 
-        .candle:hover {
-            transform: scale(1.25);
-        }
+        .candle:hover { transform: scale(1.25); }
 
         .candle.off {
             opacity: 0.35;
@@ -255,7 +241,6 @@
             font-weight: 600;
         }
 
-        /* Badges */
         .badges-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -293,7 +278,6 @@
             color: #cbd5e1;
         }
 
-        /* Citation */
         .quote-box {
             background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(59, 130, 246, 0.15));
             border-left: 5px solid #ec4899;
@@ -305,7 +289,6 @@
             color: #f1f5f9;
         }
 
-        /* Boutons */
         .btn-group {
             display: flex;
             gap: 12px;
@@ -379,7 +362,6 @@
         <h1>Joyeux Anniversaire Papa ! 🚀</h1>
         <p class="subtitle">Né le 10 octobre 1981 • Cap sur les 45 ans avec panache !</p>
 
-        <!-- Compteur de temps basé sur l'heure du téléphone -->
         <div class="counter-grid">
             <div class="counter-box">
                 <div class="counter-number" id="years">--</div>
@@ -399,18 +381,17 @@
             </div>
         </div>
 
-        <!-- Galerie de souvenirs en carrousel -->
         <div class="gallery-section">
             <h3 class="gallery-title">📸 Souvenirs en famille (Glisse & Clique pour agrandir)</h3>
             <div class="carousel-container">
                 <button class="nav-btn left" onclick="scrollCarousel(-200)">❮</button>
                 <div class="carousel-track" id="carouselTrack">
-                    <div class="photo-card" onclick="openLightbox('img/repas_st-Gobain.jpg', 'Repas à Saint-Gobain 🍽️')">
-                        <img src="img/repas_st-Gobain.jpg" alt="Repas à Saint-Gobain">
-                        <span>Repas à Saint-Gobain 🍽️</span>
+                    <div class="photo-card" onclick="openLightbox('repas_st-Gobain.jpg', 'Repas à Saint-Gobain 🍽️')">
+                        <img src="./repas_st-Gobain.jpg" alt="Repas à Saint-Gobain">
+                        <span>Repas de Noël à Saint-Gobain</span>
                     </div>
-                    <div class="photo-card" onclick="openLightbox('img/souvenir_1.jpg', 'Les bons moments ❤️')">
-                        <img src="img/souvenir_1.jpg" alt="Bons moments ensemble">
+                    <div class="photo-card" onclick="openLightbox('souvenir_1.jpg', 'Les bons moments ❤️')">
+                        <img src="./souvenir_1.jpg" alt="Bons moments ensemble">
                         <span>Les bons moments ❤️</span>
                     </div>
                 </div>
@@ -418,7 +399,6 @@
             </div>
         </div>
 
-        <!-- Gâteau interactif -->
         <div class="cake-section">
             <div class="candles">
                 <span class="candle" onclick="extinguish(this)">🕯️</span>
@@ -430,7 +410,6 @@
             <p class="cake-text" id="cake-status">Clique sur les bougies pour les souffler ! 🎂</p>
         </div>
 
-        <!-- Badges Super-Pouvoirs -->
         <div class="badges-grid">
             <div class="badge-card">
                 <span>👑</span>
@@ -449,12 +428,10 @@
             </div>
         </div>
 
-        <!-- Citation dynamique -->
         <div class="quote-box" id="fun-quote">
             💡 <b>Le saviez-vous ?</b> Avoir un super papa comme toi, ça n'a pas de prix.
         </div>
 
-        <!-- Boutons d'action -->
         <div class="btn-group">
             <button class="btn" id="music-btn" onclick="toggleMusic()">🎵 Musique 8-bit Douce</button>
             <button class="btn btn-secondary" onclick="revealSurprise()">🎁 Message Final</button>
@@ -465,7 +442,6 @@
         </div>
     </div>
 
-    <!-- Pop-up Lightbox -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <span class="close-lightbox">&times;</span>
         <img id="lightboxImg" src="" alt="Image agrandie">
@@ -473,13 +449,11 @@
     </div>
 
     <script>
-        // 1. Carrousel de défilement horizontal
         function scrollCarousel(distance) {
             const track = document.getElementById('carouselTrack');
             track.scrollBy({ left: distance, behavior: 'smooth' });
         }
 
-        // 2. Pop-up Lightbox
         function openLightbox(imgSrc, captionText) {
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightboxImg');
@@ -494,7 +468,6 @@
             document.getElementById('lightbox').style.display = 'none';
         }
 
-        // 3. Horloge en temps réel basée sur le téléphone
         const birthDate = new Date('1981-10-10T00:00:00');
 
         function updateCounter() {
@@ -517,7 +490,6 @@
         setInterval(updateCounter, 1000);
         updateCounter();
 
-        // Citations tournantes
         const quotes = [
             "💡 <b>Le saviez-vous ?</b> 1981 a été un grand cru, la preuve en est !",
             "🎯 <b>Proverbe du jour :</b> Un papa formidable mérite une journée légendaire.",
@@ -535,7 +507,6 @@
             }, 300);
         }, 7000);
 
-        // Bougies interactives
         let candlesLeft = 5;
         function extinguish(element) {
             if (!element.classList.contains('off')) {
@@ -552,7 +523,6 @@
             }
         }
 
-        // 4. Lecteur Audio 8-bit doux
         let audioCtx = null;
         let isPlaying = false;
         let loopTimeout = null;
@@ -615,23 +585,20 @@
             }
         }
 
-        // 5. Générateur de vrai bruit de canon à confettis (Pop + Bruit de pression d'air)
         function playConfettiSound() {
             try {
                 const soundCtx = new (window.AudioContext || window.webkitAudioContext)();
                 
-                // 1. Coup de Pression d'Air (Bruit Blanc filtré)
-                const bufferSize = soundCtx.sampleRate * 0.25; // 0.25 seconde
+                const bufferSize = soundCtx.sampleRate * 0.25;
                 const buffer = soundCtx.createBuffer(1, bufferSize, soundCtx.sampleRate);
                 const data = buffer.getChannelData(0);
                 for (let i = 0; i < bufferSize; i++) {
-                    data[i] = Math.random() * 2 - 1; // Bruit blanc
+                    data[i] = Math.random() * 2 - 1;
                 }
 
                 const noise = soundCtx.createBufferSource();
                 noise.buffer = buffer;
 
-                // Filtre pass-bas pour donner un effet de "Pfft / Boom"
                 const filter = soundCtx.createBiquadFilter();
                 filter.type = 'lowpass';
                 filter.frequency.setValueAtTime(1000, soundCtx.currentTime);
@@ -645,7 +612,6 @@
                 filter.connect(noiseGain);
                 noiseGain.connect(soundCtx.destination);
 
-                // 2. Le "POP" sec de l'explosion du canon
                 const popOsc = soundCtx.createOscillator();
                 const popGain = soundCtx.createGain();
                 popOsc.type = 'triangle';
@@ -658,25 +624,23 @@
                 popOsc.connect(popGain);
                 popGain.connect(soundCtx.destination);
 
-                // Lancement simultané du POP et du souffle d'air
                 popOsc.start();
                 popOsc.stop(soundCtx.currentTime + 0.08);
                 noise.start();
                 noise.stop(soundCtx.currentTime + 0.2);
 
             } catch (e) {
-                console.log("Audio non supporté sans interaction préalable");
+                console.log("Audio non supporté");
             }
         }
 
         function revealSurprise() {
             const surprise = document.getElementById('surprise');
             surprise.style.display = 'block';
-            playConfettiSound(); // Joue le vrai son du canon à confettis !
+            playConfettiSound();
             launchConfetti();
         }
 
-        // Système d'animation de confettis
         const canvas = document.getElementById('confetti-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
